@@ -1,0 +1,19 @@
+getting the camera to work
+
+
+wget -O install_pivariety_pkgs.sh https://github.com/ArduCAM/Arducam-Pivariety-V4L2-Driver/releases/download/install_script/install_pivariety_pkgs.sh
+chmod +x install_pivariety_pkgs.sh
+./install_pivariety_pkgs.sh -p libcamera_dev
+./install_pivariety_pkgs.sh -p libcamera_apps // if you get an error run
+sudo dpkg -i rpicam-apps_1.5.2-3_arm64.deb
+sudo nano /boot/firmware/config.txt 
+#Find the line: [all], add the following item under it:
+dtoverlay=imx519 //This is for slot index 1
+#Save and reboot. 
+^O Write Out 
+Enter
+^X Exit
+rpicam-hello
+
+
+https://docs.arducam.com/Raspberry-Pi-Camera/Native-camera/16MP-IMX519/
