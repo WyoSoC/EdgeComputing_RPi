@@ -57,5 +57,6 @@ This guide will walk you through the steps to set up the Arducam 16MP IMX519 cam
 After rebooting, test the camera by running:
 ```bash
 rpicam-hello
+```
 
-https://docs.arducam.com/Raspberry-Pi-Camera/Native-camera/16MP-IMX519/
+[https://docs.arducam.com/Raspberry-Pi-Camera/Native-camera/16MP-IMX519/]
