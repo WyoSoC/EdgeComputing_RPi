@@ -32,6 +32,9 @@ rpicam-hello -t 0 --post-process-file ~/rpicam-apps/assets/hailo_yolov5_personfa
 ```
 
 This command:
-Runs rpicam-hello with the Hailo NPU performing object detection.
-Uses the YOLOv5 model specified in the hailo_yolov5_personface.json file.
-Sets the resolution for low-resolution input processing to 640x640.
+
+1. Runs rpicam-hello with the Hailo NPU performing object detection.
+
+2. Uses the YOLOv5 model specified in the hailo_yolov5_personface.json file.
+
+3. Sets the resolution for low-resolution input processing to 640x640.
