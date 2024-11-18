@@ -13,7 +13,7 @@ hailortcli fw-control identify
 ```
 This command should output details about the Hailo NPU, confirming it’s recognized by the system.
 
-##Step 2: Set Up the rpicam-apps Environment
+## Step 2: Set Up the rpicam-apps Environment
 
 Clone the rpicam-apps repository to access the JSON configuration files required for the demos:
 ```bash
@@ -21,7 +21,7 @@ git clone --depth 1 https://github.com/raspberrypi/rpicam-apps.git ~/rpicam-apps
 ```
 These JSON files contain the configuration settings for various AI models that run on the Hailo NPU.
 
-##Step 3: Run Object Detection Demo Using rpicam-hello
+## Step 3: Run Object Detection Demo Using rpicam-hello
 
 To utilize the Hailo NPU, you can start by running the provided demos. For example, to perform object detection using the YOLOv5 model:
 
