@@ -104,26 +104,42 @@ import board
 import busio
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.ndimage import zoom
 from adafruit_mlx90640 import MLX90640
 
 # Create I2C bus and MLX90640 object
-i2c = busio.I2C(board.SCL, board.SDA)
+i2c = busio.I2C(board.SCL, board.SDA, frequency=1000000)  # 1 MHz I2C speed
 mlx90640 = MLX90640(i2c)
 
 # Start reading thermal data
 frame = [0] * 768  # 24 * 32 = 768
 plt.ion()  # Interactive mode for live plotting
 fig, ax = plt.subplots()
+cbar = None  # Placeholder for the color bar
+
+# Remove axis ticks for cleaner display
+ax.set_xticks([])
+ax.set_yticks([])
+ax.set_aspect('equal')
 
 while True:
     mlx90640.getFrame(frame)
-    # Reshape the flat list to a 24x32 2D array
     reshaped_frame = np.reshape(frame, (24, 32))
 
-    # Plot the thermal image
+    # Upscale the frame for higher resolution
+    upscaled_frame = zoom(reshaped_frame, (10, 10), order=3)  # 10x scaling
+
+    # Clear the axis for updating
     ax.clear()
-    ax.imshow(reshaped_frame, cmap='hot', interpolation='nearest')
-    plt.draw()  # Update the plot
+    img = ax.imshow(upscaled_frame, cmap='plasma', interpolation='bilinear')
+
+    # Add the color bar only once
+    if cbar is None:
+        cbar = plt.colorbar(img, ax=ax)
+        cbar.set_label('Temperature (°C)', rotation=270, labelpad=15)
+
+    # Update the plot
+    plt.draw()
     plt.pause(0.1)  # Pause for a short time to allow the plot to update
     time.sleep(0.2)
 ```
