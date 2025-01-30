@@ -1,7 +1,8 @@
-
 # Enhanced General Object Detection & Count Logging with YOLOv8 & ByteTrack
 
 This guide provides step-by-step instructions to set up and run an enhanced object detection and tracking system using YOLOv8 and ByteTrack on a Raspberry Pi.
+
+---
 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
@@ -246,22 +247,23 @@ ious = np.zeros((len(atlbrs), len(btlbrs)), dtype=np.float)
 With this:
 
 ```python
-ious = np.zeros((len(atlbrs), len
+ious = np.zeros((len(atlbrs), len(btlbrs)), dtype=np.float64)
 ```
-Alternatively, you can also use float (both will work):
+
+Alternatively, you can also use `float` (both will work):
 
 ```python
 ious = np.zeros((len(atlbrs), len(btlbrs)), dtype=float)
 ```
+
 Save the changes:
+- Press `Ctrl+O` to write the file.
+- Press `Enter` to confirm.
+- Press `Ctrl+X` to exit `nano`.
 
-Press Ctrl+O to write the file.
+---
 
-Press Enter to confirm.
-
-Press Ctrl+X to exit nano.
-
-
+## Run the Code
 
 ```python
 import re
