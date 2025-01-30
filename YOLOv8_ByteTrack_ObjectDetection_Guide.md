@@ -1,4 +1,4 @@
-```markdown
+
 # Enhanced General Object Detection & Count Logging with YOLOv8 & ByteTrack
 
 This guide provides step-by-step instructions to set up and run an enhanced object detection and tracking system using YOLOv8 and ByteTrack on a Raspberry Pi.
