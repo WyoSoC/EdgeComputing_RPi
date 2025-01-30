@@ -1,3 +1,4 @@
+```markdown
 # Enhanced General Object Detection & Count Logging with YOLOv8 & ByteTrack
 
 This guide provides step-by-step instructions to set up and run an enhanced object detection and tracking system using YOLOv8 and ByteTrack on a Raspberry Pi.
@@ -12,14 +13,20 @@ This guide provides step-by-step instructions to set up and run an enhanced obje
    - [Install Additional Dependencies Individually](#5-install-additional-dependencies-individually)
    - [Install YOLOX in Development Mode](#6-install-yolox-in-development-mode)
    - [Verify Installations](#7-verify-installations)
-3. [Fix the `matching.py` File Code](#-fix-the-matchingpy-file-code)
-4. [Run the Code](#-run-the-following-code)
+3. [Fix the `matching.py` File Code](#fix-the-matchingpy-file-code)
+4. [Run the Code](#run-the-following-code)
 
 ---
+
 ## Prerequisites
 
 - **General Object Detection with YOLOv8**: Ensure you have installed all required dependencies for YOLOv8.
-- **LibreOffice**: Required for handling Excel files.
+- **LibreOffice**: Required for handling Excel files. Install it using:
+  ```bash
+  sudo apt install libreoffice
+  ```
+
+---
 
 ## Installation of ByteTrack Dependencies
 
@@ -31,145 +38,178 @@ Follow these steps to install PyTorch, YOLOX, ONNX, and pycocotools on your Rasp
 python3 -m venv ~/bytetrack_env/bytetrack_venv
 source ~/bytetrack_env/bytetrack_venv/bin/activate
 ```
-This ensures a clean, isolated Python environment.
-###2️⃣ Upgrade Essential Tools
+
+**Why?** Ensures a clean, isolated Python environment.
+
+### 2️⃣ Upgrade Essential Tools
 
 ```bash
 pip install --upgrade pip setuptools wheel
 ```
-###3️⃣ Install PyTorch and TorchVision
+
+### 3️⃣ Install PyTorch and TorchVision
+
 ```bash
 pip install torch==2.0.1 torchvision==0.15.2 --extra-index-url https://download.pytorch.org/whl/cpu
 ```
-Explicit versions are critical for Raspberry Pi compatibility.
+
+**Why?** Explicit versions are critical for Raspberry Pi compatibility.
 
 ### 4️⃣ Install Requirements from ByteTrack
+
 Navigate to your ByteTrack directory:
 
 ```bash
 cd ~/bytetrack_env/ByteTrack
 pip install -r requirements.txt
 ```
-This installs core dependencies listed in the project's requirements.txt.
-If there are version issues (like numpy or incompatible dependencies), install specific versions manually.
+
+If there are version issues (like `numpy` or incompatible dependencies), install specific versions manually:
+
 ```bash
 pip install numpy==1.25.2 cython==3.0.11 setuptools==75.6.0
 ```
+
 ### 5️⃣ Install Additional Dependencies Individually
-a. ONNX
+
+#### a. ONNX
+
 ```bash
 pip install onnx==1.15.0
 ```
 
-Why? ONNX compatibility with Raspberry Pi requires an older version.
+**Why?** ONNX compatibility with Raspberry Pi requires an older version.
 
-b. ONNX Runtime
+#### b. ONNX Runtime
+
 ```bash
 pip install onnxruntime==1.15.1
 ```
-Why? Runtime required for ONNX operations.
 
-pycocotools
+**Why?** Runtime required for ONNX operations.
+
+#### c. pycocotools
+
 ```bash
 CFLAGS="-Wno-cpp -Wno-unused-function -std=c99" pip install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
 ```
-Why? Custom flags prevent compilation errors on ARM architecture.
+
+**Why?** Custom flags prevent compilation errors on ARM architecture.
 
 If you face any errors with this part, proceed with the following steps:
 
-Reinstall packaging:
+1. **Reinstall packaging**:
+    ```bash
+    pip uninstall -y packaging
+    pip install packaging==23.1
+    ```
 
-```bash
-pip uninstall -y packaging
-pip install packaging==23.1
-```
-Clear pip Cache:
+2. **Clear pip Cache**:
+    ```bash
+    pip cache purge
+    rm -rf ~/.cache/pip
+    ```
 
-```bash
-pip cache purge
-rm -rf ~/.cache/pip
-```
-Reinstall wheel:
+3. **Reinstall wheel**:
+    ```bash
+    pip uninstall -y wheel
+    pip install wheel==0.41.2
+    ```
 
-```bash
-pip uninstall -y wheel
-pip install wheel==0.41.2
-```
-Verify the Installation:
+4. **Verify the Installation**:
+    ```bash
+    pip show wheel
+    ```
 
-```bash
-pip show wheel
-```
-Reinstall pycocotools:
+5. **Reinstall pycocotools**:
+    ```bash
+    CFLAGS="-Wno-cpp -Wno-unused-function -std=c99" pip install --no-cache-dir 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
+    ```
 
-```bash
-CFLAGS="-Wno-cpp -Wno-unused-function -std=c99" pip install --no-cache-dir 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
-```
-d. thop
+#### d. thop
+
 ```bash
 pip install thop
 ```
-Why? Required by YOLOX for model profiling.
 
-e. OpenCV (cv2)
+**Why?** Required by YOLOX for model profiling.
+
+#### e. OpenCV (cv2)
+
 ```bash
 pip install opencv-python
 ```
-Why? Required for image and video processing.
 
-f. Loguru
+**Why?** Required for image and video processing.
+
+#### f. Loguru
+
 ```bash
 pip install loguru
 ```
-g. Tabulate
+
+#### g. Tabulate
+
 ```bash
 pip install tabulate
 ```
-h. Scipy
+
+#### h. Scipy
+
 ```bash
 pip install scipy
 ```
-i. Lap
+
+#### i. Lap
+
 ```bash
 pip install lap
 ```
-j. Pandas
+
+#### j. Pandas
+
 ```bash
 pip install pandas
 ```
-k. Openpyxl
+
+#### k. Openpyxl
+
 ```bash
 pip install openpyxl
 ```
-l. Torchvision
+
+#### l. Torchvision
+
 ```bash
 pip install torchvision
 ```
 
+### 6️⃣ Install YOLOX in Development Mode
 
-###6️⃣ Install YOLOX in Development Mode
 Navigate to the ByteTrack directory:
 
 ```bash
 cd ~/bytetrack_env/ByteTrack
 python3 setup.py develop
 ```
-Why? Installs YOLOX in a way that allows code modifications without reinstallation.
+
+**Why?** Installs YOLOX in a way that allows code modifications without reinstallation.
 
 If an error occurs, proceed with the following steps:
 
-Reinstall sympy:
+1. **Reinstall sympy**:
+    ```bash
+    pip uninstall -y sympy
+    pip install sympy==1.12
+    ```
 
-```bash
-pip uninstall -y sympy
-pip install sympy==1.12
-```
-Verify Installation:
+2. **Verify Installation**:
+    ```bash
+    python -c "import sympy; print(sympy.__version__)"
+    ```
 
-```bash
-python -c "import sympy; print(sympy.__version__)"
-```
-###7️⃣ Verify Installations
+### 7️⃣ Verify Installations
+
 Run the following commands to ensure everything is correctly installed:
 
 ```bash
@@ -178,30 +218,35 @@ python3 -c "import yolox; print('YOLOX imported successfully')"
 python3 -c "import onnx; print('ONNX version:', onnx.__version__)"
 python3 -c "import pycocotools; print('Pycocotools installed successfully')"
 ```
-Expected output:
 
-```bash
+**Expected output**:
+```
 PyTorch version: 2.0.1
 YOLOX imported successfully
 ONNX version: 1.15.0
 Pycocotools installed successfully
 ```
 
-###✅ Fix the matching.py File Code
+---
+
+## Fix the `matching.py` File Code
+
 Open the file using a text editor:
 
 ```bash
 nano /home/………/bytetrack_env/ByteTrack/yolox/tracker/matching.py
 ```
+
 Find the problematic line (line 61) and replace:
 
 ```python
 ious = np.zeros((len(atlbrs), len(btlbrs)), dtype=np.float)
 ```
+
 With this:
 
 ```python
-ious = np.zeros((len(atlbrs), len(btlbrs)), dtype=np.float64)
+ious = np.zeros((len(atlbrs), len
 ```
 Alternatively, you can also use float (both will work):
 
