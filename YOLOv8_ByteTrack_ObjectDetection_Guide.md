@@ -2,6 +2,20 @@
 
 This guide provides step-by-step instructions to set up and run an enhanced object detection and tracking system using YOLOv8 and ByteTrack on a Raspberry Pi.
 
+## Table of Contents
+1. [Prerequisites](#prerequisites)
+2. [Installation of ByteTrack Dependencies](#installation-of-bytetrack-dependencies)
+   - [Create and Activate a Virtual Environment](#1-create-and-activate-a-virtual-environment)
+   - [Upgrade Essential Tools](#2-upgrade-essential-tools)
+   - [Install PyTorch and TorchVision](#3-install-pytorch-and-torchvision)
+   - [Install Requirements from ByteTrack](#4-install-requirements-from-bytetrack)
+   - [Install Additional Dependencies Individually](#5-install-additional-dependencies-individually)
+   - [Install YOLOX in Development Mode](#6-install-yolox-in-development-mode)
+   - [Verify Installations](#7-verify-installations)
+3. [Fix the `matching.py` File Code](#-fix-the-matchingpy-file-code)
+4. [Run the Code](#-run-the-following-code)
+
+---
 ## Prerequisites
 
 - **General Object Detection with YOLOv8**: Ensure you have installed all required dependencies for YOLOv8.
