@@ -15,11 +15,11 @@ This guide provides step-by-step instructions to set up and run an enhanced obje
    - [Install YOLOX in Development Mode](#6-install-yolox-in-development-mode)
    - [Verify Installations](#7-verify-installations)
 3. [Fix the `matching.py` File Code](#fix-the-matchingpy-file-code)
-4. [Code](#run-the-following-code)
+4. [Run the Code](#run-the-following-code)
 
 ---
 
-## Prerequisites (#prerequisites)
+## Prerequisites {#prerequisites}
 
 - **General Object Detection with YOLOv8**: Ensure you have installed all required dependencies for YOLOv8.
 - **LibreOffice**: Required for handling Excel files. Install it using:
@@ -29,11 +29,11 @@ This guide provides step-by-step instructions to set up and run an enhanced obje
 
 ---
 
-## Installation of ByteTrack Dependencies (#installation-of-bytetrack-dependencies)
+## Installation of ByteTrack Dependencies {#installation-of-bytetrack-dependencies}
 
 Follow these steps to install PyTorch, YOLOX, ONNX, and pycocotools on your Raspberry Pi.
 
-### 1️⃣ Create and Activate a Virtual Environment (#1-create-and-activate-a-virtual-environment)
+### 1️⃣ Create and Activate a Virtual Environment {#1-create-and-activate-a-virtual-environment}
 
 ```bash
 python3 -m venv ~/bytetrack_env/bytetrack_venv
@@ -42,13 +42,13 @@ source ~/bytetrack_env/bytetrack_venv/bin/activate
 
 **Why?** Ensures a clean, isolated Python environment.
 
-### 2️⃣ Upgrade Essential Tools (#2-upgrade-essential-tools)
+### 2️⃣ Upgrade Essential Tools {#2-upgrade-essential-tools}
 
 ```bash
 pip install --upgrade pip setuptools wheel
 ```
 
-### 3️⃣ Install PyTorch and TorchVision (#3-install-pytorch-and-torchvision)
+### 3️⃣ Install PyTorch and TorchVision {#3-install-pytorch-and-torchvision}
 
 ```bash
 pip install torch==2.0.1 torchvision==0.15.2 --extra-index-url https://download.pytorch.org/whl/cpu
@@ -56,7 +56,7 @@ pip install torch==2.0.1 torchvision==0.15.2 --extra-index-url https://download.
 
 **Why?** Explicit versions are critical for Raspberry Pi compatibility.
 
-### 4️⃣ Install Requirements from ByteTrack (#4-install-requirements-from-bytetrack)
+### 4️⃣ Install Requirements from ByteTrack {#4-install-requirements-from-bytetrack}
 
 Navigate to your ByteTrack directory:
 
@@ -70,8 +70,8 @@ If there are version issues (like `numpy` or incompatible dependencies), install
 ```bash
 pip install numpy==1.25.2 cython==3.0.11 setuptools==75.6.0
 ```
- 
-### 5️⃣ Install Additional Dependencies Individually (#5-install-additional-dependencies-individually)
+
+### 5️⃣ Install Additional Dependencies Individually {#5-install-additional-dependencies-individually}
 
 #### a. ONNX
 
@@ -185,7 +185,7 @@ pip install openpyxl
 pip install torchvision
 ```
 
-### 6️⃣ Install YOLOX in Development Mode (#6-install-yolox-in-development-mode)
+### 6️⃣ Install YOLOX in Development Mode {#6-install-yolox-in-development-mode}
 
 Navigate to the ByteTrack directory:
 
@@ -209,7 +209,7 @@ If an error occurs, proceed with the following steps:
     python -c "import sympy; print(sympy.__version__)"
     ```
 
-### 7️⃣ Verify Installations (#7-verify-installations)
+### 7️⃣ Verify Installations {#7-verify-installations}
 
 Run the following commands to ensure everything is correctly installed:
 
@@ -230,7 +230,7 @@ Pycocotools installed successfully
 
 ---
 
-## Fix the `matching.py` File Code (#fix-the-matchingpy-file-code)
+## Fix the `matching.py` File Code {#fix-the-matchingpy-file-code}
 
 Open the file using a text editor:
 
@@ -263,7 +263,7 @@ Save the changes:
 
 ---
 
-## Run the Code (#run-the-following-code)
+## Run the Code {#run-the-following-code}
 
 ```python
 import re
