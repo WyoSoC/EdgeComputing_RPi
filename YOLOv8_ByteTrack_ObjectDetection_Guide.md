@@ -3,7 +3,6 @@
 This guide provides step-by-step instructions to set up and run an enhanced object detection and tracking system using YOLOv8 and ByteTrack on a Raspberry Pi.
 
 ---
-
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
 2. [Installation of ByteTrack Dependencies](#installation-of-bytetrack-dependencies)
